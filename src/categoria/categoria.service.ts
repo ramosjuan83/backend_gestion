@@ -12,6 +12,7 @@ export class CategoriasService {
     ) { }
 
     getCategoria() {
+        console.log("pasa");
         return this.categoriaRepository.find();
     }
 
