@@ -12,10 +12,18 @@ export class CategoriaController {
         return this.categoriaService.getCategoria();
     }
 
-    @Post()
-    createCategoria(@Body() createCategoriaDto: CreateCategoriaDto) {
+    @Get(':id')
+    public async getEdit(@Param('id') id: number) {
+
+        return await this.categoriaService.edit(id);
+    }
+
+     @Post()
+    createCategorai(@Body() createCategoriaDto: CreateCategoriaDto) {
         return this.categoriaService.createCategoria(createCategoriaDto);
     }
+
+ 
 
     @Put(':id')
     async updateCategoria(@Param('id', ParseIntPipe) id: number, @Body() updateCategoriaDto: UpdateCategoriaDto) {

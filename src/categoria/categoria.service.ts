@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {  BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoriaEntitiy } from 'src/typeorm/entities/categoria.entity';
 import { CreateCategoriaParams, UpdateCategoriaParams } from 'src/utils/types';
@@ -11,20 +11,47 @@ export class CategoriasService {
         @InjectRepository(CategoriaEntitiy) private categoriaRepository: Repository<CategoriaEntitiy>,
     ) { }
 
-    getCategoria() {
-        console.log("pasa");
+    async getCategoria() {
         return this.categoriaRepository.find();
     }
 
-    createCategoria(categoriaDetails: CreateCategoriaParams) {
-
-
-        const newCategoria = this.categoriaRepository.create({ ...categoriaDetails, createdAt: new Date() });
-        return this.categoriaRepository.save(newCategoria);
+    async edit(ids: number){
+        const results = await this.categoriaRepository.findBy({ id: (ids) });
+        return results;
     }
 
-    updateCategoria(id: number, updateCategoriaDetails: UpdateCategoriaParams) {
-        return this.categoriaRepository.update({ id }, { ...updateCategoriaDetails })
+    async createCategoria(categoriaDetails: CreateCategoriaParams) {
+        try {
+            const newCategoria = this.categoriaRepository.create({ ...categoriaDetails, createdAt: new Date() });
+            await this.categoriaRepository.save(newCategoria);
+
+            return newCategoria;
+        } catch (error) {
+            // /console.log({error})
+            if(error.code=='ER_DUP_ENTRY')
+                throw new BadRequestException('Está duplicado');
+            else{
+                throw new InternalServerErrorException();
+            }
+        }
+
+        
+    }
+
+
+    async updateCategoria(id: number, updateCategoriaDetails: UpdateCategoriaParams) {
+
+        try {
+            await this.categoriaRepository.update({ id }, { ...updateCategoriaDetails })
+            
+        } catch (error) {
+            // /console.log({error})
+            if(error.code=='ER_DUP_ENTRY')
+                throw new BadRequestException('Está duplicado');
+            else{
+                throw new InternalServerErrorException();
+            }
+        }
     }
 
     deleteCategoria(id: number) {
