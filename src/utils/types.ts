@@ -10,10 +10,12 @@ export type UpdateUserParams = {
 
 export type CreateCategoriaParams = {
     id: number;
+    tipo_movimiento: number;
     nombre: string;
 }
 
 export type UpdateCategoriaParams = {
     id: number;
+    tipo_movimiento: number;
     nombre: string;
 }

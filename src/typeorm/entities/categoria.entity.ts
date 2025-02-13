@@ -6,6 +6,9 @@ export class CategoriaEntitiy {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
+    @Column()
+    tipo_movimiento: number;
+
     @Column({ unique: true })
     nombre: string;
 
