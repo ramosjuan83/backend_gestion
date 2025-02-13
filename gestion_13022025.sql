@@ -25,11 +25,12 @@ DROP TABLE IF EXISTS `categorias`;
 CREATE TABLE `categorias` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
+  `tipo_movimiento` int(11) NOT NULL,
   `createdAt` datetime NOT NULL,
   `authStrategy` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_ccdf6cd1a34ea90a7233325063` (`nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +39,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (4,'Servicios','2025-02-06 13:49:57',NULL),(5,'Vehiculos','2025-02-06 13:50:06',NULL),(6,'prueba','2025-02-06 13:52:12',NULL),(7,'prueba 7','2025-02-06 15:37:15',NULL),(8,'prueba 8','2025-02-06 15:37:42',NULL),(10,'prueba 20','2025-02-06 15:41:16',NULL),(11,'rewrerrew','2025-02-06 15:42:17',NULL),(12,'rwerwerrewrew','2025-02-06 15:43:32',NULL),(13,'dsads dsadsdasdasd sd','2025-02-06 15:45:51',NULL),(14,'xcvcxvxvxvxv','2025-02-06 15:46:35',NULL),(15,'dsadsafadfafggff','2025-02-06 15:46:55',NULL),(23,'fdfsdf fsdfsdfsdf','2025-02-06 17:11:14',NULL);
+INSERT INTO `categorias` VALUES (4,'Servicios',2,'2025-02-06 13:49:57',NULL),(5,'Vehiculos2',1,'2025-02-06 13:50:06',NULL),(6,'prueba 21',1,'2025-02-06 13:52:12',NULL),(7,'prueba 28',1,'2025-02-06 15:37:15',NULL),(8,'prueba 8',1,'2025-02-06 15:37:42',NULL),(10,' rewrerrew',1,'2025-02-06 15:41:16',NULL),(11,'rewrerrew',1,'2025-02-06 15:42:17',NULL),(12,'rwerwerrewrew2',1,'2025-02-06 15:43:32',NULL),(13,'dsads dsadsdasdasd sd2',1,'2025-02-06 15:45:51',NULL),(14,'xcvcxvxvxvxv',1,'2025-02-06 15:46:35',NULL),(15,'prueba 101',1,'2025-02-06 15:46:55',NULL),(36,'message 2',1,'2025-02-12 13:49:28',NULL),(49,' fsdfsdf dfdfdf',1,'2025-02-12 17:36:43',NULL),(51,'message 23',1,'2025-02-12 17:37:25',NULL),(53,'fsdfsdf dfdfdf',1,'2025-02-12 17:38:46',NULL),(54,'fsdfsdf',1,'2025-02-12 17:52:15',NULL),(57,'Pasaje',1,'2025-02-13 10:08:07',NULL),(58,'pasaje 2',1,'2025-02-13 10:18:48',NULL),(59,'pasaje y',2,'2025-02-13 10:56:32',NULL);
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-06 17:22:16
+-- Dump completed on 2025-02-13 17:34:18
