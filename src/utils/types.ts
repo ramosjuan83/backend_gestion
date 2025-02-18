@@ -19,3 +19,52 @@ export type UpdateCategoriaParams = {
     tipo_movimiento: number;
     nombre: string;
 }
+
+export type CreateSubcategoriaParams = {
+    id: number;
+    categoria_id: number;
+    nombre: string;
+    status_id: number;
+
+}
+
+export type UpdateSubcategoriaParams = {
+    id: number;
+    categoria_id: number;
+    nombre: string;
+    status_id: number;
+}
+
+export type CreateMonedaParams = {
+    id: number;
+    nombre: string;
+    abreviatura: string;
+    simbolo: string;
+    status_id: number;
+
+}
+
+export type UpdateMonedaParams = {
+    id: number;
+    nombre: string;
+    abreviatura: string;
+    simbolo: string;
+    status_id: number;
+
+}
+
+
+export type CreateTipocambioParams = {
+    id: number;
+    moneda_id: number;
+    nombre: string;
+    status_id: number;
+
+}
+
+export type UpdateTipocambioParams = {
+    id: number;
+    moneda_id: number;
+    nombre: string;
+    status_id: number;
+}

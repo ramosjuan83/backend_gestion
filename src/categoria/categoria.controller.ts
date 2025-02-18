@@ -14,7 +14,7 @@ export class CategoriaController {
 
     @Get(':id')
     public async getEdit(@Param('id') id: number) {
-
+       
         return await this.categoriaService.edit(id);
     }
 
@@ -33,6 +33,11 @@ export class CategoriaController {
     @Delete(':id')
     async deleteCategoria(@Param('id', ParseIntPipe) id: number) {
         await this.categoriaService.deleteCategoria(id);
+    }
+
+    @Get('tipo/:id')
+    public async getTipoMovimiento(@Param('id') id: number) {
+        return await this.categoriaService.tipo_movimiento(id);
     }
 
 }
