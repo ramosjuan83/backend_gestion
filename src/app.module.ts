@@ -7,6 +7,12 @@ import { UsersModule } from './users/users.module';
 import { CategoriasModule } from './categoria/categoria.module';
 
 import { CategoriaEntitiy } from './typeorm/entities/categoria.entity';
+import { SubcategoriaEntitiy } from './typeorm/entities/subcategoria.entity';
+import { SubcategoriasModule } from './subcategoria/subcategoria.module';
+import { MonedaEntitiy } from './typeorm/entities/moneda.entity';
+import { MonedasModule } from './moneda/moneda.module';
+import { TipocambioEntitiy } from './typeorm/entities/tipocambio.entity';
+import { TipocambiosModule } from './tipocambio/tipocambio.module';
 
 
 @Module({
@@ -17,10 +23,10 @@ import { CategoriaEntitiy } from './typeorm/entities/categoria.entity';
     username: 'root',
     password: '',
     database: 'gestion',
-    entities: [UserEntitiy,CategoriaEntitiy],
+    entities: [UserEntitiy,CategoriaEntitiy,SubcategoriaEntitiy,MonedaEntitiy,TipocambioEntitiy],
     synchronize: true
 
-  }), UsersModule, CategoriasModule],
+  }), UsersModule, CategoriasModule, SubcategoriasModule, MonedasModule, TipocambiosModule],
   controllers: [AppController],
   providers: [AppService],
 })

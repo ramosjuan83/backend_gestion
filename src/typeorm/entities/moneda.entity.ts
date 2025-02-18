@@ -1,17 +1,20 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: 'categorias' })
-export class CategoriaEntitiy {
+@Entity({ name: 'monedas' })
+export class MonedaEntitiy {
 
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
-    @Column()
-    tipo_movimiento: number;
-
     @Column({ unique: true })
     nombre: string;
+    
+    @Column()
+    abreviatura: string;
 
+    @Column()
+    simbolo: string;
+    
     @Column({ type: 'int' })
     status_id: number;
 

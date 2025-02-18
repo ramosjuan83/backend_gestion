@@ -12,11 +12,16 @@ export class CategoriasService {
     ) { }
 
     async getCategoria() {
-        return this.categoriaRepository.find();
+        return this.categoriaRepository.find({where:{status_id:101}});
     }
 
     async edit(ids: number){
         const results = await this.categoriaRepository.findBy({ id: (ids) });
+        return results;
+    }
+
+    async tipo_movimiento(ids: number){
+        const results = await this.categoriaRepository.findBy({ tipo_movimiento: (ids) });
         return results;
     }
 
@@ -55,6 +60,6 @@ export class CategoriasService {
     }
 
     deleteCategoria(id: number) {
-        return this.categoriaRepository.delete(id)
+        return this.categoriaRepository.update({id},{status_id:103})
     }
 }
