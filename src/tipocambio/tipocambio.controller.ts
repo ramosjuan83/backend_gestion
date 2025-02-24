@@ -35,4 +35,9 @@ export class TipocambioController {
         await this.tipocambioService.deleteTipocambio(id);
     }
 
+    @Get('tipo/:id')
+    public async getTipoCambio(@Param('id') id: number) {
+        return await this.tipocambioService.tipo_cambio(id);
+    }
+
 }

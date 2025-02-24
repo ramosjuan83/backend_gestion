@@ -57,6 +57,18 @@ export class TipocambiosService {
         }
     }
 
+    async tipo_cambio(ids: number){
+
+    
+       const mon= await this.tipocambioRepository.find({
+            relations: { monedas  : true },
+            where: {
+                monedas: { id: ids },
+            },
+        })
+        return mon;
+    }
+
     deleteTipocambio(id: number) {
         return this.tipocambioRepository.update({id},{status_id:103})
     }

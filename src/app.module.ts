@@ -13,6 +13,9 @@ import { MonedaEntitiy } from './typeorm/entities/moneda.entity';
 import { MonedasModule } from './moneda/moneda.module';
 import { TipocambioEntitiy } from './typeorm/entities/tipocambio.entity';
 import { TipocambiosModule } from './tipocambio/tipocambio.module';
+import { TasaEntitiy } from './typeorm/entities/tasa.entity';
+import { TasasModule } from './tasa/tasa.module';
+import { TasaItemSubscriber } from 'src/typeorm/entities/tasa.subscriber';
 
 
 @Module({
@@ -23,10 +26,10 @@ import { TipocambiosModule } from './tipocambio/tipocambio.module';
     username: 'root',
     password: '',
     database: 'gestion',
-    entities: [UserEntitiy,CategoriaEntitiy,SubcategoriaEntitiy,MonedaEntitiy,TipocambioEntitiy],
+    entities: [UserEntitiy,CategoriaEntitiy,SubcategoriaEntitiy,MonedaEntitiy,TipocambioEntitiy,TasaEntitiy],
     synchronize: true
 
-  }), UsersModule, CategoriasModule, SubcategoriasModule, MonedasModule, TipocambiosModule],
+  }), UsersModule, CategoriasModule, SubcategoriasModule, MonedasModule, TipocambiosModule, TasasModule],
   controllers: [AppController],
   providers: [AppService],
 })

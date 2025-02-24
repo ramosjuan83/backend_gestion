@@ -68,3 +68,24 @@ export type UpdateTipocambioParams = {
     nombre: string;
     status_id: number;
 }
+
+export type CreateTasaParams = {
+    id: number;
+    moneda_id: number;
+    tipo_cambio_id: number;
+    monto_tasa: number;
+    fecha: Date;
+    defecto: boolean;
+    status_id: number;
+
+}
+
+export type UpdateTasaParams = {
+    id: number;
+    moneda_id: number;
+    tipo_cambio_id: number;
+    monto_tasa: number;
+    fecha: Date;
+    defecto: boolean;
+    status_id: number;
+}
