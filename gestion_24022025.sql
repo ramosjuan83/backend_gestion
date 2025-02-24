@@ -106,6 +106,41 @@ INSERT INTO `subcategorias` VALUES (1,'Mantenimiento 1',5,101,'2025-02-14 15:56:
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tasas`
+--
+
+DROP TABLE IF EXISTS `tasas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tasas` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fecha` datetime NOT NULL,
+  `monto_tasa` float NOT NULL,
+  `defecto` tinyint(4) NOT NULL,
+  `moneda_id` bigint(20) DEFAULT NULL,
+  `tipo_cambio_id` bigint(20) DEFAULT NULL,
+  `status_id` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `authStrategy` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_657f832c8562bee3d9f5c5bccfe` (`moneda_id`),
+  KEY `FK_00e6d6400ad378384c440c72b19` (`tipo_cambio_id`),
+  CONSTRAINT `FK_00e6d6400ad378384c440c72b19` FOREIGN KEY (`tipo_cambio_id`) REFERENCES `tipocambios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_657f832c8562bee3d9f5c5bccfe` FOREIGN KEY (`moneda_id`) REFERENCES `monedas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tasas`
+--
+
+LOCK TABLES `tasas` WRITE;
+/*!40000 ALTER TABLE `tasas` DISABLE KEYS */;
+INSERT INTO `tasas` VALUES (1,'2025-02-24 00:00:00',20,0,1,1,101,'2025-02-24 11:48:07',NULL),(2,'2025-02-24 00:00:00',50,0,1,1,101,'2025-02-24 11:53:31',NULL),(3,'2025-02-24 00:00:00',12,0,1,1,101,'2025-02-24 12:08:17',NULL),(4,'2025-02-24 00:00:00',30,0,1,1,101,'2025-02-24 12:10:56',NULL),(5,'2025-02-24 00:00:00',30,0,1,1,101,'2025-02-24 12:11:57',NULL),(6,'2025-02-24 00:00:00',13,0,1,1,101,'2025-02-24 12:14:27',NULL),(7,'2025-02-24 00:00:00',12,0,1,1,101,'2025-02-24 12:15:23',NULL),(8,'2025-02-17 00:00:00',12,0,1,1,101,'2025-02-24 12:15:43',NULL),(9,'2025-02-24 00:00:00',12,0,1,1,101,'2025-02-24 12:17:26',NULL),(10,'2025-02-24 00:00:00',10,0,1,1,101,'2025-02-24 12:33:22',NULL),(11,'2025-02-24 00:00:00',20,0,1,1,101,'2025-02-24 12:34:36',NULL),(12,'2025-02-24 00:00:00',12,0,1,1,101,'2025-02-24 12:35:15',NULL),(13,'2025-02-24 00:00:00',10,0,1,1,101,'2025-02-24 12:37:13',NULL),(14,'2025-02-24 00:00:00',14,0,1,1,101,'2025-02-24 12:38:42',NULL),(15,'2025-02-24 00:00:00',5,0,1,1,101,'2025-02-24 12:39:33',NULL),(16,'2025-02-24 00:00:00',62,0,1,1,101,'2025-02-24 12:40:37',NULL),(17,'2025-02-24 00:00:00',10,0,1,1,101,'2025-02-24 12:41:42',NULL),(18,'2025-02-24 00:00:00',65,0,1,1,101,'2025-02-24 12:41:58',NULL),(19,'2025-02-24 00:00:00',61,0,1,1,101,'2025-02-24 12:42:56',NULL),(20,'2025-02-24 00:00:00',63,1,1,1,101,'2025-02-24 13:16:17',NULL);
+/*!40000 ALTER TABLE `tasas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tipocambios`
 --
 
@@ -123,7 +158,7 @@ CREATE TABLE `tipocambios` (
   UNIQUE KEY `IDX_6866df6043e451ec773f0c1d15` (`nombre`),
   KEY `FK_55903eb3939a7f032b9e90ee3ee` (`moneda_id`),
   CONSTRAINT `FK_55903eb3939a7f032b9e90ee3ee` FOREIGN KEY (`moneda_id`) REFERENCES `monedas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +167,7 @@ CREATE TABLE `tipocambios` (
 
 LOCK TABLES `tipocambios` WRITE;
 /*!40000 ALTER TABLE `tipocambios` DISABLE KEYS */;
-INSERT INTO `tipocambios` VALUES (1,'BCV',1,101,'2025-02-18 16:52:02',NULL);
+INSERT INTO `tipocambios` VALUES (1,'BCV',1,101,'2025-02-18 16:52:02',NULL),(2,'ewrewrew',3,101,'2025-02-19 11:13:31',NULL),(4,'Dolar Paralelo',1,101,'2025-02-20 13:00:00',NULL);
 /*!40000 ALTER TABLE `tipocambios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-18 16:58:18
+-- Dump completed on 2025-02-24 13:25:24
