@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { UserEntitiy } from './typeorm/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { CategoriasModule } from './categoria/categoria.module';
+import { MovimientosModule } from './movimiento/movimiento.module';
+
 
 import { CategoriaEntitiy } from './typeorm/entities/categoria.entity';
 import { SubcategoriaEntitiy } from './typeorm/entities/subcategoria.entity';
@@ -14,8 +16,8 @@ import { MonedasModule } from './moneda/moneda.module';
 import { TipocambioEntitiy } from './typeorm/entities/tipocambio.entity';
 import { TipocambiosModule } from './tipocambio/tipocambio.module';
 import { TasaEntitiy } from './typeorm/entities/tasa.entity';
+import { MovimientoEntitiy } from './typeorm/entities/movimiento.entity';
 import { TasasModule } from './tasa/tasa.module';
-import { TasaItemSubscriber } from 'src/typeorm/entities/tasa.subscriber';
 
 
 @Module({
@@ -26,10 +28,10 @@ import { TasaItemSubscriber } from 'src/typeorm/entities/tasa.subscriber';
     username: 'root',
     password: '',
     database: 'gestion',
-    entities: [UserEntitiy,CategoriaEntitiy,SubcategoriaEntitiy,MonedaEntitiy,TipocambioEntitiy,TasaEntitiy],
+    entities: [UserEntitiy,CategoriaEntitiy,SubcategoriaEntitiy,MonedaEntitiy,TipocambioEntitiy,TasaEntitiy, MovimientoEntitiy],
     synchronize: true
 
-  }), UsersModule, CategoriasModule, SubcategoriasModule, MonedasModule, TipocambiosModule, TasasModule],
+  }), UsersModule, CategoriasModule, SubcategoriasModule, MonedasModule, TipocambiosModule, TasasModule, MovimientosModule],
   controllers: [AppController],
   providers: [AppService],
 })
