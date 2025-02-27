@@ -89,3 +89,29 @@ export type UpdateTasaParams = {
     defecto: boolean;
     status_id: number;
 }
+
+
+export type CreateMovimientoParams = {
+    id: number;
+    categoria_id: number;
+    subcategoria_id: number;
+    tasa_id: number;
+    fecha_movimiento: Date;
+    hora: Date;
+    monto_bolivares: number;
+    monto_divisas: number;
+    status_id: number;
+
+}
+
+export type UpdateMovimientoParams = {
+    id: number;
+    categoria_id: number;
+    subcategoria_id: number;
+    tasa_id: number;
+    fecha_movimiento: Date;
+    hora: Date;
+    monto_bolivares: number;
+    monto_divisas: number;
+    status_id: number;
+}

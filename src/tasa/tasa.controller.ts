@@ -12,6 +12,11 @@ export class TasaController {
         return this.tasaService.getTasa();
     }
 
+    @Get('tasa_defecto/')
+    public async getPorDefecto(){
+        return await this.tasaService.getPordefecto();
+    }
+
     @Get(':id')
     public async getEdit(@Param('id') id: number) {
 

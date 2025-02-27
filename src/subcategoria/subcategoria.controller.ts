@@ -35,4 +35,9 @@ export class SubcategoriaController {
         await this.subcategoriaService.deleteSubcategoria(id);
     }
 
+    @Get('tipo/:id')
+    public async getTipoCategoria(@Param('id') id: number) {
+        return await this.subcategoriaService.tipo_categoria(id);
+    }
+
 }
