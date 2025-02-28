@@ -9,6 +9,7 @@ export class MovimientoController {
 
     @Post()
     getTipocambios(@Body() datos: object) {
+        //console.log("datos",datos);
         //let filtro={fecha_desde:'2025-02-22',fecha_hasta:'2025-02-27'};
         return this.movimientoService.getMovimiento(datos);
     }
@@ -19,7 +20,7 @@ export class MovimientoController {
         return await this.movimientoService.edit(id);
     }
 
-     @Post()
+     @Post("/store")
     createMovimiento(@Body() createMovimientoDto: CreateMovimientoDto) {
         return this.movimientoService.createMovimiento(createMovimientoDto);
     }

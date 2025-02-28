@@ -76,7 +76,6 @@ export class MovimientosService {
             // const newTasa = this.movimientoRepository.create({ ...tasaDetails, createdAt: new Date() });
             // await this.movimientoRepository.save(newTasa);
 
-            console.log(movimientoDetails);
 
             const newMovimiento = await this.dataSource
             .createQueryBuilder()
