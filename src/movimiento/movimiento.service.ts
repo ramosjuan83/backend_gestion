@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MovimientoEntitiy } from 'src/typeorm/entities/movimiento.entity';
 import { CreateMovimientoParams, UpdateMovimientoParams } from 'src/utils/types';
 import { DataSource, Repository } from 'typeorm';
+import {_} from 'lodash'; 
 
 @Injectable()
 export class MovimientosService {
@@ -41,16 +42,80 @@ export class MovimientosService {
             (t, i) => t + i.monto_divisas,
             0
           );
-
-         
-
-
-
-
-
-
         return {movimiento:movimientos, totales:{ingreso:total_ingresos, egreso: total_egresos, saldo: total_ingresos-total_egresos}};
     }
+
+    async getResumen(filtros) {
+
+        let movimientos = await this.dataSource.getRepository('movimientos')
+        .createQueryBuilder("movimientos")
+        .where("movimientos.status_id = :status_id", { status_id: 101 })
+        .andWhere('movimientos.fecha_movimiento >= :desde', {desde: filtros.fecha_desde } )
+        .andWhere('movimientos.fecha_movimiento <= :hasta', {hasta: filtros.fecha_hasta })
+        .leftJoinAndSelect("movimientos.tasas", "tasa")
+        .leftJoinAndSelect("movimientos.categorias", "categoria")
+        .leftJoinAndSelect("movimientos.subcategorias", "subcategoria")
+        .leftJoinAndSelect("tasa.monedas", "moneda")
+        .getMany()
+
+        movimientos=movimientos.map((e)=>{
+            return {
+                ...e,
+                clave:e.categorias.id,
+                nombre_categoria:e.categorias.nombre,
+                tipo:e.categorias.tipo_movimiento
+            }
+        });
+
+
+
+     function resumen_categorias(arr){
+
+        let resumenCategorias=_.chain(arr).groupBy('nombre_categoria').map((values,key)=>{
+            return{
+                id:values[0].id,
+                fecha_movimiento:values[0].fecha_movimiento,
+                hora:values[0].hora,
+                nombre_categoria: values[0].nombre_categoria,
+                monto_bolivares:values.reduce(
+                    (t, i) => t + i.monto_bolivares,
+                    0
+                   ),
+                monto_divisas:values.reduce(
+                    (t, i) => t + i.monto_divisas,
+                    0
+                   ),
+                clave: values[0].clave
+            }
+        }).value();
+
+        return resumenCategorias;
+     }
+
+       let resumenMovimientos=_.chain(movimientos).groupBy("tipo").map((values,key)=>{
+            return{
+                id:values[0].id,
+                tipo_movimiento:key=='1'?'Ingresos':'Egresos',
+                fecha_movimiento:values[0].fecha_movimiento,
+                hora:values[0].hora,
+                nombre_categoria: values[0].nombre_categoria,
+                categorias:resumen_categorias(values),
+                monto_bolivares:values.reduce(
+                    (t, i) => t + i.monto_bolivares,
+                    0
+                   ),
+                monto_divisas:values.reduce(
+                    (t, i) => t + i.monto_divisas,
+                    0
+                   ),
+                clave: values[0].clave
+            }
+        }).value();
+
+      
+        
+      return {resumen:resumenMovimientos};
+  }
 
     async edit(ids: number){
 

@@ -14,6 +14,11 @@ export class MovimientoController {
         return this.movimientoService.getMovimiento(datos);
     }
 
+    @Post("/resumen")
+    getReporteResumen(@Body() datos: object) {
+        return this.movimientoService.getResumen(datos);
+    }
+
     @Get(':id')
     public async getEdit(@Param('id') id: number) {
 
