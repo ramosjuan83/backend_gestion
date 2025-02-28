@@ -60,4 +60,15 @@ export class SubcategoriasService {
     deleteSubcategoria(id: number) {
         return this.subcategoriaRepository.update({id},{status_id:103})
     }
+
+    async tipo_categoria(ids: number){
+
+        const sub= await this.subcategoriaRepository.find({
+            relations: { categorias  : true },
+            where: {
+                categorias: { id: ids },
+            },
+        })
+        return sub;
+    }
 }

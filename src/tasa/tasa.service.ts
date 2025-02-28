@@ -20,6 +20,13 @@ export class TasasService {
         return resul;
     }
 
+    async getPordefecto() {
+
+        let resul = await this.tasaRepository.find({relations:['monedas','tipocambios'],where:{ status_id: 101, defecto: true }});
+        //console.log("resul",resul);
+        return resul;
+    }
+
     async edit(ids: number){
         const results = await this.tasaRepository.find({relations:['monedas','tipocambios'], where:{ id: (ids) }});
         return results;
