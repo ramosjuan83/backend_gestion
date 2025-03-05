@@ -55,6 +55,7 @@ export class MovimientosService {
         .leftJoinAndSelect("movimientos.tasas", "tasa")
         .leftJoinAndSelect("movimientos.categorias", "categoria")
         .leftJoinAndSelect("movimientos.subcategorias", "subcategoria")
+        .leftJoinAndSelect("subcategoria.categorias", "categoria2")
         .leftJoinAndSelect("tasa.monedas", "moneda")
         .getMany()
 
@@ -67,15 +68,33 @@ export class MovimientosService {
             }
         });
 
+     function resumen_subcategorias(arr, val){
+
+       //console.log("arr",arr);
+
+        arr=arr.map((e)=>{
+            return {
+                id:e.id,
+                fecha_movimiento: e.fecha_movimiento,
+                hora: e.hora,
+                monto_bolivares: e.monto_bolivares,
+                monto_divisas: e.monto_divisas,
+                nombre_subcategoria: e.subcategorias.nombre,
+                nombre_categoria: e.subcategorias.categorias.nombre,
+                categoria: e.subcategorias.categorias.id
+            }
+        })
+
+        //console.log("arr",arr);
 
 
-     function resumen_categorias(arr){
-
-        let resumenCategorias=_.chain(arr).groupBy('nombre_categoria').map((values,key)=>{
+        let resumenSubCategorias=_.chain(arr).groupBy("nombre_subcategoria").map((values,key)=>{
             return{
                 id:values[0].id,
                 fecha_movimiento:values[0].fecha_movimiento,
                 hora:values[0].hora,
+                categoria: values[0].categoria,
+                nombre_subcategoria: values[0].nombre_subcategoria,
                 nombre_categoria: values[0].nombre_categoria,
                 monto_bolivares:values.reduce(
                     (t, i) => t + i.monto_bolivares,
@@ -89,7 +108,36 @@ export class MovimientosService {
             }
         }).value();
 
+       //console.log("resumenSubCategorias",resumenSubCategorias);
+
+        return resumenSubCategorias;
+        
+     }
+
+     function resumen_categorias(arr){
+
+        let resumenCategorias=_.chain(arr).groupBy('nombre_categoria').map((values,key)=>{
+            return{
+                id:values[0].id,
+                fecha_movimiento:values[0].fecha_movimiento,
+                hora:values[0].hora,
+                nombre_categoria: values[0].nombre_categoria,
+                subcategorias: resumen_subcategorias(values, values[0].subcategorias),
+                monto_bolivares:values.reduce(
+                    (t, i) => t + i.monto_bolivares,
+                    0
+                   ),
+                monto_divisas:values.reduce(
+                    (t, i) => t + i.monto_divisas,
+                    0
+                   ),
+                clave: values[0].clave
+            }
+        }).value();
+
+        //console.log("resumenCategorias", resumenCategorias);
         return resumenCategorias;
+
      }
 
        let resumenMovimientos=_.chain(movimientos).groupBy("tipo").map((values,key)=>{
