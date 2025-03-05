@@ -79,9 +79,9 @@ export class MovimientosService {
                 hora: e.hora,
                 monto_bolivares: e.monto_bolivares,
                 monto_divisas: e.monto_divisas,
-                nombre_subcategoria: e.subcategorias.nombre,
-                nombre_categoria: e.subcategorias.categorias.nombre,
-                categoria: e.subcategorias.categorias.id
+                nombre_subcategoria: e.subcategorias?.nombre,
+                nombre_categoria: e.subcategorias?.categorias.nombre,
+                categoria: e.subcategorias?.categorias.id
             }
         })
 
